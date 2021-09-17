@@ -18,7 +18,7 @@ function verifyJWT(token) {
       if (error) {
         reject({
           status: "error",
-          error: error,
+          error: error.name,
           message: "Error verifying token"
         })
       }

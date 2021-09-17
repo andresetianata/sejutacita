@@ -25,16 +25,14 @@ async function api_insert_user(req, res) {
       "Username": req.body.username,
       "Password": await bcrypt.hash(req.body.password, saltRound)
     }
-    db.collection("users").insertOne(userObject, function(err, result) {
-      if (err) throw err;
-      res.json({
-        status: "success"
-      })
-    });
+    let insert = await db.collection("users").insertOne(userObject);
+    //some error will be thrown to catch
+    res.json({
+      status: "success"
+    })
   }
   catch(error) {
-    console.log("Error", error)
-    var message = error.message || "Error Insert User";
+    var message = (error.message ? error.message : "Error insert");
     res.json({
       status: "error",
       message: message

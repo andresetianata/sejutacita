@@ -13,30 +13,24 @@ module.exports = {
 
 async function api_user_login(req, res) {
   try {
-    db.collection("users").findOne({ "Username": req.body.username}).toArray(async function(error, result) {
-      if (error) throw {
-        error: error,
-        message: "Error calling database"
+    let findUser = await db.collection("users").findOne({ "Username": req.body.username});
+    if (!findUser) throw {
+      message: "Invalid username/password"
+    }
+    let comparePassword = await bcrypt.compare(req.body.password, findUser.Password);
+    if (comparePassword == true) {
+      let generatedToken = token.signJWT(findUser, 120); //2 hours expiration
+      res.json({
+        status: "success",
+        token: generatedToken,
+        data: findUser
+      })
+    }
+    else {
+      throw {
+        "message": "Invalid username/password"
       }
-      if (result.length == 0) throw {
-        message: "Invalid username/password"
-      }
-
-      let comparePassword = await bcrypt.compare(req.body.password, result[0].Password);
-      if (comparePassword == true) {
-        let generatedToken = token.signJWT(result[0], 2); //2 minutes expiration
-        res.json({
-          status: "success",
-          token: generatedToken,
-          data: result[0]
-        })
-      }
-      else {
-        throw {
-          "message": "Invalid username/password"
-        }
-      }
-    })
+    }
   }
   catch(error) {
     var message = (error.message ? error.message : "Error Login");
