@@ -22,7 +22,7 @@ async function api_user_login(req, res) {
       let generatedToken = Authentication.generate_token(user)
       res.json({
         status: "success",
-        token: generatedToken.token,
+        access_token: generatedToken.token,
         refresh_token: generatedToken.refresh_token,
         data: user
       })
