@@ -19,7 +19,8 @@ async function api_user_login(req, res) {
     }
     let comparePassword = await bcrypt.compare(req.body.password, user.Password);
     if (comparePassword == true) {
-      let generatedToken = Authentication.generate_token(user)
+      let generatedToken = await Authentication.generate_token(user)
+      console.log("Status generate token", generatedToken);
       res.json({
         status: "success",
         access_token: generatedToken.token,

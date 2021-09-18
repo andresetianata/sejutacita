@@ -4,7 +4,7 @@ const Authentication = require('../models/Authentication')
 const User = require('../models/User');
 const Login = require('../models/Login');
 
-router.post('/refresh_token', Authentication.api_refresh_token);
+router.post('/refresh_token', Authentication.api_refresh_token_redis);
 router.get('/user/read_all', User.api_read_users_all);
 router.post('/user/insert', User.api_insert_user)
 router.get('/user/read/:id', User.api_read_user_by_id)
