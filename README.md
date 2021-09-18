@@ -28,7 +28,7 @@ docker run --name <your desired container name> -d andresetiawan/sejutacita_test
 ```
 
 ### In case you want to build the Docker image from scratch
-1. create .env file in project root folder, containing database credentials (since I've deployed my mongo in my own EC2 instance and open the port). I've sent the pic on Whatsapp about the credentials.
+1. create .env file in project root folder, containing database credentials (since I've deployed my mongo in my own EC2 instance and open the port). I've sent the creds on Whatsapp.
 2. build the image locally and run the container
 ```sh
 docker build -t <your desired image name> .
@@ -38,7 +38,7 @@ docker run --name <your desired container name> -d andresetiawan/sejutacita_test
 
 ### In case you want to run with npm
 1. npm install
-2. create .env file in project root folder, containing database credentials (since I've deployed my mongo in my own EC2 instance and open the port). I've sent the pic on Whatsapp about the credentials.
+2. create .env file in project root folder, containing database credentials (since I've deployed my mongo in my own EC2 instance and open the port). I've sent the creds on Whatsapp.
 3. npm start
 
 
